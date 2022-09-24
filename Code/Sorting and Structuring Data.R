@@ -1,11 +1,10 @@
 library(readxl)
-Uber_Trip_Details <- read_excel("C:/Users/dnadi/Downloads/Uber_Trip_Details.xlsx", 
+Uber_Trip_Details <- read_excel("C:/Users/dnadi/Downloads/Uber R project/DriverData/Uber_Trip_Details.xlsx", 
                                 col_types = c("date", "date", "date", 
                                               "date", "numeric", "numeric", "numeric", 
                                               "numeric", "numeric", "numeric", 
                                               "numeric", "text", "numeric", "text", 
                                               "numeric", "numeric"))
-View(Uber_Trip_Details)
 
 names(Uber_Trip_Details)[3] <- "Pick_Up_Time"
 names(Uber_Trip_Details)[4] <- "Drop_Off_Time"
@@ -34,8 +33,6 @@ names(PUTimes)[1] <- "Pick_Up_Time"
 
 #Create Vector add the extra row
 PUTimes <- c(as.character(PUTimes$Pick_Up_Time))
-
-
 
 #Create the Data Frame
 
@@ -104,6 +101,4 @@ wkDays <- weekdays(as.Date(Uber_Trip_Details$Date,"%Y-%m-%d"))
 #paste in Days Column 
 Uber_Trip_Details$Day <- wkDays 
 
-
-
-
+View(Uber_Trip_Details)
