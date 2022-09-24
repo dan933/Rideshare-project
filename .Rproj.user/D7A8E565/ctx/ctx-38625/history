@@ -1,0 +1,512 @@
+#Time to Income ggplot2
+IncomePh <- c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Time))
+IncomePh
+PHH <- c(levels(dataHour))
+PHH
+#Time to Income ggplot2
+IncomePH <- c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Time))
+PHH <- c(levels(dataHour))
+IncomePH <- data.frame(PHH,IncomePH)
+IncomePH
+names(IncomePH)[1] <- "Time"
+names(IncomePD)[2] <- "Sum_Price"
+names(IncomePH)[2] <- "Sum_Price"
+View(IncomePH)
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+#Graph Income in Days of the Week
+ggplot(IncomePD,aes(Days,Sum_Price))+geom_bar(stat = "identity")
+income_Ph_PD
+View(Uber_Trip_Details)
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+ggplot(incomePD,aes(Day,Sum_Price))+geom_point()
+ggplot(incomePD,aes(Day,Sum_Price))+geom_point()
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+ggplot(income_Ph_PD,aes(Day,Sum_Price))+geom_point()
+ggplot(incomePD,aes(Day,Sum_Price))+geom_point()
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+df
+#Date and Time on the same graph
+setupPUDO
+View(setupPUDO)
+#Date and Time on the same graph
+rm(setupPUDO$Date)
+#Date and Time on the same graph
+rm(setupPUDO[1])
+#Date and Time on the same graph
+dl = subset(setupPUDO,select = -c(Date))
+View(setupPUDO)
+#Date and Time on the same graph
+setupPUDO = subset(setupPUDO,select = -c(Date))
+#Date and Time on the same graph
+setupPUDO
+View(setupPUDO)
+View(setupPUDO)
+#Date and Time on the same graph
+setupPUDO <- income_Ph_PD
+setupPUDO
+setupPUDO$time <- Uber_Trip_Details$Pick_Up_Time
+class(setupPUDO$time)
+setupPUDO
+class(setupPUDO$time)
+setupPUDO$time
+#Date and Time on the same graph
+setupPUDO <- income_Ph_PD
+class(setupPUDO$Time)
+typeof(setupPUDO$Time) <-
+typeof(setupPUDO$Time)
+typeof(setupPUDO$Time)
+setupPUDO$Time <- as.character(setupPUDO$Time)
+setupPUDO$Time
+class(setupPUDO$Time)
+View(Uber_Trip_Details)
+setupPUDO$Time <- paste(Uber_Trip_Details$Date,setupPUDO$Time,sep = " ")
+setupPUDO$Time <- paste(Uber_Trip_Details$Date[1:54],setupPUDO$Time,sep = " ")
+setupPUDO$Time
+?as_datetime(setupPUDO$Time)
+setupPUDO$Time <- as_datetime(setupPUDO$Time,format = "%Y-%m-%d %H:%M:%S")
+library(lubridate)
+setupPUDO$Time <- as_datetime(setupPUDO$Time,format = "%Y-%m-%d %H:%M:%S")
+setupPUDO$Time
+View(Uber_Trip_Details)
+class(setupPUDO)
+View(setupPUDO)
+setupPUDO %>% group_by(Day,Time) %>% summaries(Sum_Price = sum(price))
+setupPUDO <- Uber_Trip_Details
+setupPUDO
+income_Ph_PD
+income_Ph_PD %>% group_by(day,Time) %>% summarise(Sum_Price = sum(price))
+income_Ph_PD %>% group_by(Day,Time) %>% summarise(Sum_Price = sum(price))
+income_Ph_PD %>% group_by(Day,Time) %>% summarise(Sum_Price)
+#Date and Time on the same graph
+setupPUDO <- income_Ph_PD
+setupPUDO$Time <- as.character(setupPUDO$Time)
+setupPUDO$Time <- paste(Uber_Trip_Details$Date[1:54],setupPUDO$Time,sep = " ")
+setupPUDO$Time <- as_datetime(setupPUDO$Time,format = "%Y-%m-%d %H:%M:%S")
+View(setupPUDO)
+ggplot(setupPUDO aes(Time,Sum_Price))+geom_bar()
+ggplot(setupPUDO aes(Time,Sum_Price))+geom_bar()
+ggplot(setupPUDO,aes(Time,Sum_Price))+geom_bar()
+rlang::last_error()
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+ggplot(setupPUDO,aes(Time,Sum_Price))+geom_bar()
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+View(income_Ph_PD)
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT + geom_point(size = 4)
+View(income_Ph_PD)
+#Graph with Date and time
+#factor the Sum_price
+income_Ph_PD1 <- income_Ph_PD
+factor(income_Ph_PD1)
+levels(income_Ph_PD1)
+factor(income_Ph_PD1$Sum_Price)
+GPT + geom_point(size = 2)
+GPT + geom_point(aes(colour = factor()))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT + geom_point(size = 2)
+View(Uber_Trip_Details[[3]][[1]])
+?cut()
+cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,20))
+income_Ph_PD$Sum_Price
+levels(income_Ph_PD$Sum_Price)
+cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+income_Ph_PD$Sum_Price
+factor(test) <- cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+test<- 0
+factor(test) <- cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+factor(test) <- cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+test<- 0
+factor(test)  cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+test <- 0
+factor(test)  cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+factor(test,levels = cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+factor(test,levels = cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+cut(income_Ph_PD$Sum_Price,breaks = seq(0,400,10))
+cut(breaks = seq(0,400,10))
+cut(income_Ph_PD1$Sum_Price,breaks = seq(0,400,10))
+income_Ph_PD1$Sum_Price
+factor(income_Ph_PD1$Sum_Price)
+income_Ph_PD1$Sum_Price
+summary(income_Ph_PD1)
+str(income_Ph_PD1)
+levels(income_Ph_PD1)
+factor(income_Ph_PD1$Sum_Price)
+GPT + geom_point(size = 2)
+rm(test)
+?cut
+income_Ph_PD
+class(income_Ph_PD$Sum_Price)
+rm(income_Ph_PD1)
+income_Ph_PD1
+income_Ph_PD <- cut(income_Ph_PD$Sum_Price,c(20,60,120))
+income_Ph_PD <- cut(income_Ph_PD$Sum_Price,c(20,60,120))
+income_Ph_PD <- cut(income_Ph_PD$Sum_Price,c(20,60,120))
+income_Ph_PD
+setupPUDO <- Uber_Trip_Details
+dataHour <- factor(paste(substr(setupPUDO$Pick_Up_Time,12,14),"00:00", sep = ""))
+dataDay <- factor(setupPUDO$Day, levels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"),labels = c("Mon","Tue","Wed","Thur","Fri","Sat","Sun"))
+dataPrice <- setupPUDO$Total
+PU_L <- setupPUDO$`Pick Up Location`
+df <- data.frame(dataDay,dataHour,dataPrice,PU_L)
+names(df)[1] <- "Day"
+names(df)[2] <- "Hour"
+names(df)[3] <- "Price"
+names(df)[4] <- "Location"
+?aggregate
+setupPUDO <- Uber_Trip_Details
+dataHour <- factor(paste(substr(setupPUDO$Pick_Up_Time,12,14),"00:00", sep = ""))
+dataDay <- factor(setupPUDO$Day, levels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"),labels = c("Mon","Tue","Wed","Thur","Fri","Sat","Sun"))
+dataPrice <- setupPUDO$Total
+PU_L <- setupPUDO$`Pick Up Location`
+#By Day and Hour
+df <- data.frame(dataDay,dataHour,dataPrice,PU_L)
+names(df)[1] <- "Day"
+names(df)[2] <- "Hour"
+names(df)[3] <- "Price"
+names(df)[4] <- "Location"
+income_Ph_PD <- aggregate(df$Price, by=list(df$Day,df$Hour), FUN = sum, na.rm = TRUE)
+names(income_Ph_PD)[1] <- "Day"
+names(income_Ph_PD)[2] <- "Time"
+names(income_Ph_PD)[3] <- "Sum_Price"
+#sort dataframe Mon-Sun
+income_Ph_PD <- income_Ph_PD %>% arrange(Day)
+#df sum by weekdays
+IncomePD <-c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Day))
+PDD <- c("Mon","Tue","Wed","Thur","Fri","Sat","Sun")
+IncomePD <- data.frame(PDD,IncomePD)
+names(IncomePD)[1] <- "Days"
+names(IncomePD)[2] <- "Sum_Price"
+IncomePD$Days <-factor(IncomePD$Days, levels = c("Mon","Tue","Wed","Thur","Fri","Sat","Sun"))
+#Graph Income in Days of the Week
+ggplot(IncomePD,aes(Days,Sum_Price))+geom_bar(stat = "identity")
+#Time to Income ggplot2
+IncomePH <- c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Time))
+PHH <- c(levels(dataHour))
+IncomePH <- data.frame(PHH,IncomePH)
+names(IncomePH)[1] <- "Time"
+names(IncomePH)[2] <- "Sum_Price"
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+RM <- cut(income_Ph_PD$Sum_Price,c(20,60,120))
+RM
+income_Ph_PD$Sum_Price
+income_Ph_PD$Sum_Price[12]
+income_Ph_PD$Sum_Price[12]
+income_Ph_PD$Sum_Price[13]
+RM <- cut(income_Ph_PD$Sum_Price,c(0,20,120,1000))
+RM
+GPT + geom_point(aes(colour = factor(RM),size =4))
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,20,30,40,70,100))
+RM
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,20,30,40,70,100))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT + geom_point(size = 2)
+GPT + geom_point(aes(colour = factor(RM),size =4))
+GPT + geom_point(aes(colour = factor(RM)))
+GPT + geom_point(aes(colour = factor(RM)),size = 3)
+GPT + geom_point(aes(colour = factor(RM)),size = 4)
+?cut
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,20,30,40,70,100),labels = c("$0-20","$20-30","$30-40","$40-70","$70-300"))
+GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + geom_point(size = 2)
+GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + geom_point(aes(colour = factor(RM),labels = "Money Earnt"),size = 4)
+GPT + geom_point(aes(colour = factor(RM),fill = "Profit"),size = 4)
+GPT + geom_point(aes(colour = factor(RM),colour = "Profit"),size = 4)
+GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + geom_point(aes(colour = "Money" =factor(RM)),size = 4)
+GPT + geom_point(aes(colour = factor(RM),labels = "Money"),size = 4)
+GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + geom_point(aes(colour = factor(RM),labels(colour) = "Money"),size = 4)
+GPT + geom_point(aes(colour = factor(RM),labels(colour)),size = 4)
+GPT + geom_point(aes(colour = factor(RM),labels(colour)),size = 4)
+GPT + geom_point(aes(colour = factor(RM),size = 4)
+GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Money")
+GPT + labs(colour = "Profit")
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT + geom_point(size = 2)
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT + geom_point(size = 2)
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Profit")
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT + geom_point(size = 2)
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT
+GPT + geom_point(size = 2)
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT
+GPT + labs(colour = "Profit")
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT
+GPT + labs(colour = "Profit")
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GST <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GST
+GST + labs(colour = "Profit")
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,50,80,100,120,<130),labels = c("$0-20","$20-30","$30-40","$40-70","$70-300"))
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,50,80,100,120,500),labels = c("$0-20","$20-30","$30-40","$40-70","$70-300"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Profit")
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,50,80,100,120,500),labels = c("$0-20","$20-30","$30-40","$40-70","$70-300"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Profit")
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,50,80,100,120),labels = c("$0-20","$20-30","$30-40","$40-70","$70-300"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Profit")
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,50,80,100,120),labels = c("$0-50","$50-80","$80-100","$100-120"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Profit")
+income_Ph_PD$Sum_Price
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,50,80,100,120),labels = c("$0-25","$25-50","$50-75","$75-100"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Profit")
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,25,50,75,100),labels = c("$0-25","$25-50","$50-75","$75-100"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT + labs(colour = "Profit")
+#Shape Graph
+GPT+geom_point(aes(shape = factor(RM)),size = 4)
+#Shape Graph
+GST <- GPT+geom_point(aes(shape = factor(RM)),size = 4)
+GPT <-GPT + labs(colour = "Profit")
+GPT
+GST <- GST + labs(shape = "Profit")
+GST
+#Shape Graph
+GST <- GPT+geom_point(aes(shape = factor(RM)),size = 4)
+GST
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+#Shape Graph
+GST <- GPT+geom_point(aes(shape = factor(RM)),size = 4)
+GST <- GST + labs(shape = "Profit")
+GST <- GST + labs(factor(RM) = "Profit")
+GST <- GST + labs(shape = "Profit")
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT
+GPT <-GPT + labs(colour = "Profit")
+GPT
+#Shape Graph
+GST <- GPT+geom_point(aes(shape = factor(RM)),size = 4)
+GST
+#Shape Graph
+GST <- ggplot(income_Ph_PD,aes(Day,Time))
+GST <- GPT+geom_point(aes(shape = factor(RM)),size = 4)
+GST <- GST + labs(shape = "Profit")
+GST
+summary(income_Ph_PD$Sum_Price)
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,18.75,31.79,39.90,76.70),labels = c("$0-18.75","$18.75-31.79","$31.79-39.90","39.90-76.70"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT
+#Shape Graph
+GST <- ggplot(income_Ph_PD,aes(Day,Time))
+GST <- GPT+geom_point(aes(shape = factor(RM)),size = 4)
+GST <- GST + labs(shape = "Profit")
+GST
+GST <- GST+geom_point(aes(shape = factor(RM)),size = 4)
+GST <- GST + labs(shape = "Profit")
+GST
+GST <- GST+geom_point(aes(shape = factor(RM)),size = 5)
+GST <- GST + labs(shape = "Profit")
+GST
+GST <- GST+geom_point(aes(shape = factor(RM)),size = 3)
+GST
+GPT
+GPT <-GPT + labs(colour = "Profit")
+GPT
+#Shape Graph
+GST <- ggplot(income_Ph_PD,aes(Day,Time))
+GST <- GST+geom_point(aes(shape = factor(RM)),size = 3)
+GST <- GST + labs(shape = "Profit")
+GST
+#Time to Income ggplot2
+IncomePH <- c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Time))
+PHH <- c(levels(dataHour))
+IncomePH <- data.frame(PHH,IncomePH)
+names(IncomePH)[1] <- "Time"
+names(IncomePH)[2] <- "Sum_Price"
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+setupPUDO <- Uber_Trip_Details
+dataHour <- factor(paste(substr(setupPUDO$Pick_Up_Time,12,14),"00:00", sep = ""))
+dataDay <- factor(setupPUDO$Day, levels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"),labels = c("Mon","Tue","Wed","Thur","Fri","Sat","Sun"))
+dataPrice <- setupPUDO$Total
+PU_L <- setupPUDO$`Pick Up Location`
+df <- data.frame(dataDay,dataHour,dataPrice,PU_L)
+names(df)[1] <- "Day"
+names(df)[2] <- "Hour"
+names(df)[3] <- "Price"
+names(df)[4] <- "Location"
+income_Ph_PD <- aggregate(df$Price, by=list(df$Day,df$Hour), FUN = sum, na.rm = TRUE)
+names(income_Ph_PD)[1] <- "Day"
+names(income_Ph_PD)[2] <- "Time"
+names(income_Ph_PD)[3] <- "Sum_Price"
+#sort dataframe Mon-Sun
+income_Ph_PD <- income_Ph_PD %>% arrange(Day)
+#df sum by weekdays
+IncomePD <-c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Day))
+PDD <- c("Mon","Tue","Wed","Thur","Fri","Sat","Sun")
+IncomePD <- data.frame(PDD,IncomePD)
+names(IncomePD)[1] <- "Days"
+names(IncomePD)[2] <- "Sum_Price"
+IncomePD$Days <-factor(IncomePD$Days, levels = c("Mon","Tue","Wed","Thur","Fri","Sat","Sun"))
+#Graph Income in Days of the Week
+ggplot(IncomePD,aes(Days,Sum_Price))+geom_bar(stat = "identity")
+#Time to Income ggplot2
+IncomePH <- c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Time))
+PHH <- c(levels(dataHour))
+IncomePH <- data.frame(PHH,IncomePH)
+names(IncomePH)[1] <- "Time"
+names(IncomePH)[2] <- "Sum_Price"
+ggplot(IncomePH,aes(Time,Sum_Price))+geom_bar(stat = "identity")
+#Graph with Date and time
+#factor the Sum_price
+RM <- cut(income_Ph_PD$Sum_Price,c(0,18.75,31.79,39.90,76.70),labels = c("$0-18.75","$18.75-31.79","$31.79-39.90","39.90-76.70"))
+GPT <- ggplot(income_Ph_PD, aes(Day,Time))
+GPT <- GPT + geom_point(aes(colour = factor(RM)),size = 4)
+GPT <-GPT + labs(colour = "Profit")
+#Shape Graph
+GST <- ggplot(income_Ph_PD,aes(Day,Time))
+GST <- GST+geom_point(aes(shape = factor(RM)),size = 3)
+GST <- GST + labs(shape = "Profit")
+GST
+GST
+df
+#location graph
+GPS <- income_Ph_PD <- aggregate(df$Price, by=list(df$Day,df$Location), FUN = sum, na.rm = TRUE)
+GPS
+names(GPS)[1] <- "Day"
+names(GPS)[3] <- "Price"
+names(GPS)[3] <- "Profit"
+GPS
+?arrange(GPS)
+GPS <- GPS %>% arrange(Day)
+install.packages("dplyr")
+library("dplyr")
+install.packages("dplyr")
+install.packages("dplyr")
+library("dplyr")
+GPS <- GPS %>% arrange(Day)
+GPS
+names(GPS)[1] <- "Day"
+names(GPS)[2] <- "Suburb"
+names(GPS)[3] <- "Profit"
+GPS
+summary(GPS)
+df$Time
+#location graph
+GPS <- income_Ph_PD <- aggregate(df$Price, by=list(df$Day,df$Hour, df$Location), FUN = sum, na.rm = TRUE)
+GPS
+names(GPS)[1] <- "Day"
+names(GPS)[4] <- "Profit"
+names(GPS)[1] <- "Day"
+names(GPS)[2] <- "Hour"
+names(GPS)[3] <- "suburb"
+names(GPS)[4] <- "Profit"
+GPS <- GPS %>% arrange(Day)
+GPS
+names(GPS)[3] <- "Suburb"
+names(PU_L)
+names(PU_L) <- "PU_Location"
+PU_L
+names(PU_L) <- "PU_Location"
+PU_L <- setupPUDO$`Pick Up Location`
+PU_L
+PU_L <- setupPUDO$`Pick Up Location`
+PU_L <- factor(PU_L)
+PU_L
+df <- data.frame(dataDay,dataHour,dataPrice,PU_L)
+names(df)[1] <- "Day"
+names(df)[2] <- "Hour"
+names(df)[3] <- "Price"
+names(df)[4] <- "Location"
+df
+#location graph
+GPS <- income_Ph_PD <- aggregate(df$Price, by=list(df$Day,df$Hour, df$Location), FUN = sum, na.rm = TRUE)
+factor(df$Location)
+options(scipen = 999)
+data("midwest")
+GPS <- ggplot(GPS,aes(Hour,Profit)) +
+geom_point(aes(col=suburb,size=Profit))
+install.packages("ggplot")
+install.packages("ggplot2")
+library("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+install.packages("ggplot2")
+remove.packages("ggplot2", lib="C:/Program Files/R/R-3.6.1/library")
+library(ggplot2, lib.loc = "C:/Program Files/R/R-3.6.1/library")
+GPS <- ggplot(GPS,aes(Hour,Profit)) +
+geom_point(aes(col=suburb,size=Profit))
+#location graph
+GPS <- income_Ph_PD <- aggregate(df$Price, by=list(df$Day,df$Hour, df$Location), FUN = sum, na.rm = TRUE)
+names(GPS)[1] <- "Day"
+names(GPS)[2] <- "Hour"
+names(GPS)[3] <- "Suburb"
+names(GPS)[4] <- "Profit"
+GPS <- GPS %>% arrange(Day)
+GPS <- ggplot(GPS,aes(Hour,Profit)) +
+geom_point(aes(col=suburb,size=Profit))
+GPS
+GPS <- GPS %>% arrange(Day)
+GPS <- GPS %>% arrange(Day)
+GPS <- ggplot(GPS,aes(Hour,Profit)) +
+geom_point(aes(col=Suburb,size=Profit))
+install.packages("dplyr")
+library("dplyr")
+install.packages("stringr")
+install.packages("dplyr")
+library("dplyr")
+install.packages("stringr")
+library("stringr")
+install.packages("lubridate")
+library("lubridate")
+install.packages("tidyverse")
+library("tidyverse")
+install.packages("ggplot2")
+library("ggplot2")
