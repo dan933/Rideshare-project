@@ -1,0 +1,462 @@
+#Script Install Packages
+# install.packages("htmltools")
+# install.packages("dplyr")
+# install.packages("stringr")
+# install.packages("lubridate")
+# install.packages("tidyverse")
+# install.packages("ggplot2")
+# install.packages("datetime")
+# install.packages("leaflet")
+# install.packages("shiny")
+# install.packages("RColorBrewer")
+# install.packages("crosstalk")
+# install.packages("datetime")
+
+
+library("dplyr")
+library("datetime")
+library("RColorBrewer")
+library("shiny")
+library("htmltools")
+library("leaflet")
+library("stringr")
+library("lubridate")
+library("tidyverse")
+library("ggplot2")
+library(rsconnect)
+
+
+
+
+library(readxl)
+Uber_Trip_Details <- read_excel("Uber_Trip_Details.xlsx", 
+                                col_types = c("date", "date", "date", 
+                                              "date", "numeric", "numeric", "numeric", 
+                                              "numeric", "numeric", "numeric", 
+                                              "numeric", "text", "numeric", "text", 
+                                              "numeric", "numeric"))
+
+#Change Column Names
+names(Uber_Trip_Details)[3] <- "Pick_Up_Time"
+names(Uber_Trip_Details)[4] <- "Drop_Off_Time"
+
+#as Charecter
+PUTimes <- as.character(Uber_Trip_Details$Pick_Up_Time)
+
+#splits data into sublists 
+PUTimes <- strsplit(PUTimes,split = " ")
+
+#turn into one whole list
+PUTimes <- unlist(PUTimes,recursive = FALSE)
+
+#turn into dataframe 
+PUTimes <- data.frame(PUTimes)
+
+#removes odds from data 
+PUTimes <- PUTimes[c(FALSE,TRUE),]
+
+#turn into dataframe 
+PUTimes <- data.frame(PUTimes)
+
+#Changing Column Names
+names(PUTimes)[1] <- "Pick_Up_Time"
+
+
+#Create Vector add the extra row
+PUTimes <- c(as.character(PUTimes$Pick_Up_Time))
+
+#Create the Data Frame
+
+PUTimes <- data.frame(PUTimes)
+
+#Convert to Charecter
+Uber_Trip_Details$Date <- as.character(Uber_Trip_Details$Date)
+Uber_Trip_Details$Pick_Up_Time <- PUTimes$PUTimes
+
+#Change to Character the Pick_Up_Time Variable 
+Uber_Trip_Details$Pick_Up_Time <- as.character(Uber_Trip_Details$Pick_Up_Time)
+
+#Combine the Two Strings 
+CPUT <- paste(Uber_Trip_Details$Date,PUTimes$PUTimes, sep = "")
+
+#ADD to Dataframe 
+Uber_Trip_Details$Pick_Up_Time <- CPUT
+
+#Convert To Date 
+Uber_Trip_Details$Pick_Up_Time <- strptime(Uber_Trip_Details$Pick_Up_Time, format = "%Y-%m-%d %H:%M:%S")
+
+
+#Drop_OFF_TIME
+
+DOTimes <- as.character(Uber_Trip_Details$Drop_Off_Time)
+
+#splits data into sublists 
+DOTimes <- strsplit(DOTimes,split = " ")
+
+#turn into one whole list
+DOTimes <- unlist(DOTimes,recursive = FALSE)
+
+#turn into dataframe 
+DOTimes <- data.frame(DOTimes)
+
+#removes odds from data 
+DOTimes <- DOTimes[c(FALSE,TRUE),]
+
+DOTimes<- c(as.character(DOTimes))
+
+DFDOTimes <- data.frame(DOTimes)
+
+
+#Change to Charecter the DO Variable 
+Uber_Trip_Details$Drop_Off_Time <- as.character(Uber_Trip_Details$Drop_Off_Time)
+
+#Combine the Two Strings 
+CPUT <- paste(Uber_Trip_Details$Date,DFDOTimes$DOTimes, sep = "")
+
+#ADD to Dataframe 
+Uber_Trip_Details$Drop_Off_Time <- CPUT
+Uber_Trip_Details$Drop_Off_Time<- strptime(Uber_Trip_Details$Drop_Off_Time, format = "%Y-%m-%d %H:%M:%S")
+
+
+#Convert to Date 
+Uber_Trip_Details$Date <- as.Date(Uber_Trip_Details$Date,"%Y-%m-%d")
+
+#Convert to Weekdays
+wkDays <- weekdays(as.Date(Uber_Trip_Details$Date,"%Y-%m-%d"))
+
+#paste in Days Column 
+Uber_Trip_Details$Day <- wkDays
+
+#Create New df to protect Uber data
+setupPUDO <- Uber_Trip_Details
+
+#convert Time to 00:00 format 
+dataHour <- factor(paste(substr(setupPUDO$Pick_Up_Time,12,14),"00:00", sep = ""))
+
+#Factor Days Mon-Sun 
+dataDay <- factor(setupPUDO$Day, levels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"),labels = c("Mon","Tue","Wed","Thur","Fri","Sat","Sun"))
+
+#add Price 
+dataPrice <- setupPUDO$Total
+
+#Add Pick Up Location 
+PU_L <- setupPUDO$`Pick Up Location`
+
+
+# Script to Group by Day and Hour
+
+df <- data.frame(dataDay,dataHour,dataPrice,PU_L)
+names(df)[1] <- "Day"
+names(df)[2] <- "Hour"
+names(df)[3] <- "Price"
+names(df)[4] <- "Suburb"
+
+#Sum Total by hour and Day 
+income_Ph_PD <- aggregate(df$Price, by=list(df$Day,df$Hour), FUN = sum, na.rm = TRUE)
+names(income_Ph_PD)[1] <- "Day"
+names(income_Ph_PD)[2] <- "Time"
+names(income_Ph_PD)[3] <- "Sum_Price"
+
+#sort dataframe Mon-Sun
+income_Ph_PD <- income_Ph_PD %>% arrange(Day)
+
+
+#df sum by weekdays
+IncomePD <-c(rowsum(income_Ph_PD$Sum_Price,income_Ph_PD$Day))
+
+PDD <- c("Mon","Tue","Wed","Thur","Fri","Sat","Sun")
+IncomePD <- data.frame(PDD,IncomePD)
+names(IncomePD)[1] <- "Days"
+names(IncomePD)[2] <- "Sum_Price"
+
+#Order Factor Mon-Sun 
+IncomePD$Days <-factor(IncomePD$Days, levels = c("Mon","Tue","Wed","Thur","Fri","Sat","Sun"))
+
+#Maps 
+
+#aggregate based on lon and LT
+grouping_df <- aggregate(df$Price, by=list(df$Suburb,df$Day,df$Hour), FUN = sum, na.rm = TRUE)
+names(grouping_df)[1] <- "Suburb"
+names(grouping_df)[2] <- "Day"
+names(grouping_df)[3] <- "Hour"
+names(grouping_df)[4] <- "Price"
+
+grouping_df <- arrange(grouping_df,Suburb,Day)
+
+#Import postcodes_geo
+postcodes_geo <- read.table("postcodes.csv",header = TRUE,sep = ",")
+
+#Markers for Map
+grouping_sub_lng_lat <- df
+grouping_sub_lng_lat <- grouping_sub_lng_lat[-c(1,2,3)]
+grouping_sub_lng_lat <- distinct(grouping_sub_lng_lat,grouping_sub_lng_lat$Suburb)
+names(grouping_sub_lng_lat)[1] <- "Suburb"
+
+
+
+
+#Add Lat to df
+x <- 1
+for (sub in grouping_sub_lng_lat$Suburb) 
+{grouping_sub_lng_lat$LT[x] <- postcodes_geo$latitude[match(grouping_sub_lng_lat$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+#Add Lon to df
+x <- 1
+for (sub in grouping_sub_lng_lat$Suburb) 
+{grouping_sub_lng_lat$Long[x] <- postcodes_geo$longitude[match(grouping_sub_lng_lat$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+names(grouping_sub_lng_lat)[1] <- "Suburb"
+
+
+grouping_sub_lng_lat <- arrange(grouping_sub_lng_lat,grouping_sub_lng_lat$Suburb)
+
+
+
+#Wheelers Hill 
+grouping_sub_lng_lat[54,]
+grouping_sub_lng_lat[54,3] <- 145.1890
+grouping_sub_lng_lat[54,2] <--37.9068
+
+#Ringwood
+grouping_sub_lng_lat[46,]
+grouping_sub_lng_lat[46,3] <- 145.2307
+grouping_sub_lng_lat[46,2] <--37.8106
+
+
+#Ringwood North
+postcodes_geo[297,4] <- -37.7999
+postcodes_geo[297,5] <- 145.2269
+
+#Adding Suburb Amount to grouping_sub_lng_lat
+
+sum_Suburbs <- aggregate(df$Price, by=list(df$Suburb), FUN = sum, na.rm = TRUE)
+names(sum_Suburbs)[2] <- "Amount"
+grouping_sub_lng_lat$Amount <- sum_Suburbs$Amount
+
+#Convert to Character so it can be added to Label
+grouping_sub_lng_lat$Amount <- as.character(grouping_sub_lng_lat$Amount)
+
+
+#Grouping Into Suburb, Days
+group_Day <- aggregate(df$Price,by = list(df$Suburb,df$Day),FUN = sum)
+names(group_Day)[1] <- "Suburb"
+names(group_Day)[2] <- "Day"
+names(group_Day)[3] <- "Amount"
+
+
+group_Day$Suburb <- as.character(group_Day$Suburb)
+group_Day <- group_Day %>% arrange(Suburb,Day)
+
+#First Layer Mon
+Group_Mon <- group_Day %>% dplyr::filter(Day =="Mon")
+
+#Add Lat to Group_Mon
+x <- 1
+for (sub in Group_Mon$Suburb) 
+{Group_Mon$LT[x] <- postcodes_geo$latitude[match(Group_Mon$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to Group_Mon
+x <- 1
+for (sub in Group_Mon$Suburb) 
+{Group_Mon$Long[x] <- postcodes_geo$longitude[match(Group_Mon$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Second Layer Tue
+Group_Tue <- group_Day %>% dplyr::filter(Day =="Tue")
+
+
+#Add Lat to Group_Tue
+x <- 1
+for (sub in Group_Tue$Suburb) 
+{Group_Tue$LT[x] <- postcodes_geo$latitude[match(Group_Tue$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to Group_Tue
+x <- 1
+for (sub in Group_Tue$Suburb) 
+{Group_Tue$Long[x] <- postcodes_geo$longitude[match(Group_Tue$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+#Third Layer Wed
+Group_Wed <- group_Day %>% dplyr::filter(Day =="Wed")
+
+
+#Add Lat to Group_Wed
+x <- 1
+for (sub in Group_Wed$Suburb) 
+{Group_Wed$LT[x] <- postcodes_geo$latitude[match(Group_Wed$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to Group_Wed
+x <- 1
+for (sub in Group_Wed$Suburb) 
+{Group_Wed$Long[x] <- postcodes_geo$longitude[match(Group_Wed$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+#Fourth Layer Thur
+Group_Thur <- group_Day %>% dplyr::filter(Day =="Thur")
+
+
+#Add Lat to Group_Thur
+x <- 1
+for (sub in Group_Thur$Suburb) 
+{Group_Thur$LT[x] <- postcodes_geo$latitude[match(Group_Thur$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to Group_Thur
+x <- 1
+for (sub in Group_Thur$Suburb) 
+{Group_Thur$Long[x] <- postcodes_geo$longitude[match(Group_Thur$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+#Fifth Layer Fri
+Group_Fri <- group_Day %>% dplyr::filter(Day =="Fri")%>% dplyr::filter(Amount > 0)
+
+
+#Add Lat to Group_Fri
+x <- 1
+for (sub in Group_Fri$Suburb) 
+{Group_Fri$LT[x] <- postcodes_geo$latitude[match(Group_Fri$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to Group_Fri
+x <- 1
+for (sub in Group_Fri$Suburb) 
+{Group_Fri$Long[x] <- postcodes_geo$longitude[match(Group_Fri$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+#Sixth Layer Sat
+Group_Sat <- group_Day %>% dplyr::filter(Day =="Sat") %>% dplyr::filter(Amount>0)
+
+
+#Add Lat to Group_Sat
+x <- 1
+for (sub in Group_Sat$Suburb) 
+{Group_Sat$LT[x] <- postcodes_geo$latitude[match(Group_Sat$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to Group_Sat
+x <- 1
+for (sub in Group_Sat$Suburb) 
+{Group_Sat$Long[x] <- postcodes_geo$longitude[match(Group_Sat$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+#Seventh Layer Sun
+Group_Sun <- group_Day %>% dplyr::filter(Day =="Sun")
+
+#Add Lat to Group_Sun
+x <- 1
+for (sub in Group_Sun$Suburb) 
+{Group_Sun$LT[x] <- postcodes_geo$latitude[match(Group_Sun$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to Group_Sun
+x <- 1
+for (sub in Group_Sun$Suburb) 
+{Group_Sun$Long[x] <- postcodes_geo$longitude[match(Group_Sun$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+summary(group_Day)
+
+pal <- colorNumeric(palette = "Reds",domain = c(5:85))
+
+summary(Group_Tue)
+
+nchar_Mon <- as.character(Group_Mon$Amount) 
+nchar_Tue <- as.character(Group_Tue$Amount) 
+nchar_Wed <- as.character(Group_Wed$Amount)
+nchar_Thur <-as.character(Group_Thur$Amount)
+nchar_Fri <-as.character(Group_Fri$Amount)
+nchar_Sat <-as.character(Group_Sat$Amount)
+nchar_Sun <- as.character(Group_Sun$Amount)
+
+
+#Map overlay groups of each day and hour filters using sliders and shiny library  
+
+map_group_hours <- grouping_df
+
+
+selectDay <- as.character(sort(unique(map_group_hours[,2:3][,1])))
+selectHour <- as.character(sort(unique(map_group_hours[,2:3][,2])))
+
+
+#Add long and lat to map_group_hours
+
+#Add Lat to map_group_hours
+x <- 1
+for (sub in map_group_hours$Suburb) 
+{map_group_hours$LT[x] <- postcodes_geo$latitude[match(map_group_hours$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+#Add Lon to map_group_hours
+x <- 1
+for (sub in map_group_hours$Suburb) 
+{map_group_hours$Long[x] <- postcodes_geo$longitude[match(map_group_hours$Suburb[x],postcodes_geo$suburb)]
+x <- x+1}
+
+
+ui <-bootstrapPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("Day","Enter Weekday", choices = c(selectDay),selected = selectDay[4]),
+      selectInput("Hour","Enter Time", choices = c(selectHour),selected = selectHour[16]),
+      width= 12
+    ),
+    mainPanel(leafletOutput("map"), width = 12)
+  ))
+
+
+
+server <- function(input,output,session) {
+  
+  observe({
+    x <- input$Day
+    
+    
+    updateSelectInput(session,"Hour",
+                      label = "Select Hour:",
+                      choices = map_group_hours$Hour[map_group_hours$Day == x],
+                      selected = head(map_group_hours$Hour[map_group_hours$Day == x],1))
+  })
+  
+  filtered <- reactive({dplyr::filter(map_group_hours,map_group_hours$Day == isolate({input$Day})
+                                      & map_group_hours$Hour == input$Hour)})
+  
+  colpal <-reactive({colorNumeric(palette = "Greens", 
+                                  domain = c(min((filtered()[[4]])):(max(filtered()[[4]])+1)))})
+  
+  output$map <- renderLeaflet({
+    leaflet() %>%
+      addTiles()})
+  
+  observe({
+    pal <- colpal ()
+    
+    leafletProxy("map", data = filtered()) %>%
+      clearMarkers() %>% 
+      addCircleMarkers(lat = ~LT, lng = ~Long, fill = TRUE, fillOpacity = 1,
+                       label = ~Suburb, popup = ~as.character(Price),color = ~pal(Price))
+  })
+  
+  observe({
+    proxy <- leafletProxy("map",data = filtered())
+    
+    proxy %>% clearControls()
+    pal <- colpal()
+    proxy %>% addLegend(position = "bottomright", pal = pal, values = ~Price) %>%
+      fitBounds(~min(Long), ~min(LT), ~max(Long), ~max(LT))
+  })
+}
+shinyApp(ui = ui,server = server)

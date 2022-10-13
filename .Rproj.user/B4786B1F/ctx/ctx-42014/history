@@ -1,9 +1,3 @@
-grouping_df <- arrange(grouping_df,Suburb,Day)
-#Import postcodes_geo
-postcodes_geo <- read.table("postcodes.csv",header = TRUE,sep = ",")
-#Markers for Map
-grouping_sub_lng_lat <- df
-grouping_sub_lng_lat <- grouping_sub_lng_lat[-c(1,2,3)]
 grouping_sub_lng_lat <- distinct(grouping_sub_lng_lat,grouping_sub_lng_lat$Suburb)
 names(grouping_sub_lng_lat)[1] <- "Suburb"
 #Add Lat to df
@@ -136,6 +130,9 @@ nchar_Thur <-as.character(Group_Thur$Amount)
 nchar_Fri <-as.character(Group_Fri$Amount)
 nchar_Sat <-as.character(Group_Sat$Amount)
 nchar_Sun <- as.character(Group_Sun$Amount)
+#Clear Map
+m_group_Days <- m_group_Days %>% clearMarkers()
+m_group_Days <- m_group_Days %>% clearControls()
 #Map overlay groups of each day and hour filters using sliders and shiny library
 map_group_hours <- grouping_df
 selectDay <- as.character(sort(unique(map_group_hours[,2:3][,1])))
@@ -192,18 +189,19 @@ fitBounds(~min(Long), ~min(LT), ~max(Long), ~max(LT))
 }
 shinyApp(ui = ui,server = server)
 #Script Install Packages
-# install.packages("htmltools")
-# install.packages("dplyr")
-# install.packages("stringr")
-# install.packages("lubridate")
-# install.packages("tidyverse")
-# install.packages("ggplot2")
-# install.packages("datetime")
-# install.packages("leaflet")
-# install.packages("shiny")
-# install.packages("RColorBrewer")
-# install.packages("crosstalk")
-# install.packages("datetime")
+install.packages("htmltools")
+install.packages("dplyr")
+install.packages("stringr")
+install.packages("lubridate")
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("datetime")
+install.packages("leaflet")
+install.packages("shiny")
+install.packages("RColorBrewer")
+install.packages("crosstalk")
+install.packages("datetime")
+install.packages("dplyr")
 library("dplyr")
 library("datetime")
 library("RColorBrewer")
@@ -214,9 +212,8 @@ library("stringr")
 library("lubridate")
 library("tidyverse")
 library("ggplot2")
-library(rsconnect)
 library(readxl)
-Uber_Trip_Details <- read_excel("Uber_Trip_Details.xlsx",
+Uber_Trip_Details <- read_excel("\\Uber_Trip_Details.xlsx",
 col_types = c("date", "date", "date",
 "date", "numeric", "numeric", "numeric",
 "numeric", "numeric", "numeric",
@@ -319,7 +316,7 @@ names(grouping_df)[3] <- "Hour"
 names(grouping_df)[4] <- "Price"
 grouping_df <- arrange(grouping_df,Suburb,Day)
 #Import postcodes_geo
-postcodes_geo <- read.table("postcodes.csv",header = TRUE,sep = ",")
+postcodes_geo <- read.table("\\postcodes.csv",header = TRUE,sep = ",")
 #Markers for Map
 grouping_sub_lng_lat <- df
 grouping_sub_lng_lat <- grouping_sub_lng_lat[-c(1,2,3)]
@@ -455,6 +452,9 @@ nchar_Thur <-as.character(Group_Thur$Amount)
 nchar_Fri <-as.character(Group_Fri$Amount)
 nchar_Sat <-as.character(Group_Sat$Amount)
 nchar_Sun <- as.character(Group_Sun$Amount)
+#Clear Map
+m_group_Days <- m_group_Days %>% clearMarkers()
+m_group_Days <- m_group_Days %>% clearControls()
 #Map overlay groups of each day and hour filters using sliders and shiny library
 map_group_hours <- grouping_df
 selectDay <- as.character(sort(unique(map_group_hours[,2:3][,1])))
